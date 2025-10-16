@@ -1,0 +1,29 @@
+<!-- Miles Halpine 10607950 -->
+<!-- Code based off Workshop 8's search-index.html_1.txt and search-index.html_2.txt -->
+<!-- This file is the interface for the search view. Allows users to search for a philosophy category and displays all the quotes with that tag -->
+<h3 style="padding-top: 10px;">Search for recipes by category</h3>
+<%= form_tag search_path, method: :get do %>
+    <div class="form-group" style="padding-bottom: 10px;"> <!-- Bootstrap padding component -->
+    <!-- Users search by quote categories instead of ingredients -->
+    <%= text_field_tag :category_query, params[:category_query], placeholder: 'Enter a category', class: "form-control" %> <!-- Bootstrap component for input areas -->
+    </div>
+    <%= submit_tag 'Search Quotes', class: "btn btn-primary" %> <!-- Bootstrap button component -->
+<% end %>
+
+<!-- If the category exists, the quotes associated with that category are shown, else... -->
+<% if params[:category_query].present? %>
+    <% if @quotematch.present? %>
+        <h4 style="padding-top: 15px;">Results:</h4>
+            <% @quotematch.each do |quote| %>
+            <div class="card bg-body-tertiary" style="margin-bottom:10px"> <!-- Bootstrap background colour and margin components -->
+            <div class="card-body">
+                <h4 class="card-title"><%= quote.quote_text %></h4> <!-- Bootstrap title component -->
+                <p class="card-text"><br />[<a href="quotes/<%= quote.id %>">View quote details</a>]</p> <!-- Bootstrap text component -->
+            </div>
+            </div>
+        <% end %>
+    <% else %>
+        <!-- Notify the user that no quotes were found -->
+        <p>No quotes associated with that category were found.</p>
+    <% end %>
+<% end %>

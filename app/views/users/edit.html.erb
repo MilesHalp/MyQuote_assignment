@@ -1,12 +1,22 @@
-<% content_for :title, "Editing user" %>
+<!-- Miles Halpine 10607950 -->
+<!-- Edits made are in line with modifications made in Workshop 8 and Workshop 10's app-views-users-edit.html.erb.txt -->
+<!-- This view file is used to provide the interface for standard users to update their personal details and for admins to update account details -->
+<div style="padding-top: 10px;">
+<!-- Change header depending on if user is a standard user or an admin -->
+<% if logged_in? && is_administrator? %>
+  <h3>Update User Details</h3>
+  <% else %>
+  <h3>Update Your Details</h3>
+  <% end %>
+</div>
 
-<h1>Editing user</h1>
-
+<!-- Links only viewable by the admin -->
 <%= render "form", user: @user %>
-
-<br>
-
+<% if logged_in? && is_administrator? %>
+<div style="padding-top: 10px;">
 <div>
   <%= link_to "Show this user", @user %> |
   <%= link_to "Back to users", users_path %>
 </div>
+</div>
+<% end %>

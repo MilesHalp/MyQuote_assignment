@@ -1,32 +1,66 @@
-<div id="<%= dom_id quote %>">
-  <p>
-    <strong>Quote text:</strong>
-    <%= quote.quote_text %>
-  </p>
+<div id="<%= dom_id quote %>" class="my-4"> <!-- Bootstrap margin component -->
 
-  <p>
-    <strong>Pub year:</strong>
-    <%= quote.pub_year %>
-  </p>
+  <!-- Quote Text -->
+  <div class="mb-3"> <!-- Bootstrap margin component -->
+    <label class="form-label"><strong>Quote Text:</strong></label> <!-- Bootstrap text bolding -->
+    <div><%= quote.quote_text %></div>
+  </div>
 
-  <p>
-    <strong>User comment:</strong>
-    <%= quote.user_comment %>
-  </p>
+  <!-- Publication Year -->
+  <div class="mb-3">
+    <label class="form-label"><strong>Publication Year:</strong></label>
+    <div><%= quote.pub_year %></div>
+  </div>
 
-  <p>
-    <strong>Is public:</strong>
-    <%= quote.is_public %>
-  </p>
+  <!-- User Comment -->
+  <% if quote.user_comment.present? %> <!-- Only appears if a user comment has been added -->
+    <div class="mb-3">
+      <label class="form-label"><strong>User Comment:</strong></label>
+      <div><%= quote.user_comment %></div>
+    </div>
+  <% end %>
 
-  <p>
-    <strong>User:</strong>
-    <%= quote.user_id %>
-  </p>
+  <!-- Quote Categories -->
+  <div class="mb-3">
+    <label class="form-label"><strong>Categories:</strong></label>
+    <div class="d-flex flex-wrap"> <!-- Bootstrap horizontal flex wrap -->
+      <% quote.categories.each do |category| %>
+        <%= category.cat_name %>
+        <% end %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Philosopher:</strong>
-    <%= quote.philosopher_id %>
-  </p>
+  <!-- User's First Name -->
+  <div class="mb-3">
+    <label class="form-label"><strong>Posted By:</strong></label>
+    <div><%= quote.user.fname %></div>
+  </div>
 
+  <!-- Philosopher's Details -->
+  <div class="mb-3">
+    <label class="form-label"><strong>Philosopher:</strong></label>
+      <div><% if quote.philosopher.present? %> <!-- If a user has not selected 'Anonymous' -->
+        <!-- Philosopher's name -->
+        <% if quote.philosopher.lname.present? %> 
+          <%= "#{quote.philosopher.fname} #{quote.philosopher.lname}" %> 
+        <% else %>
+          <%= quote.philosopher.fname %>
+        <% end %>
+
+        <!-- Philosopher's birth and death years -->
+        <% if quote.philosopher.death_year.present? %>
+          (<%= quote.philosopher.birth_year %> – <%= quote.philosopher.death_year %>)
+        <% else %>
+          (<%= quote.philosopher.birth_year %>)
+        <% end %>
+
+        <!-- Biography of the philosopher -->
+        <% if quote.philosopher.biography.present? %>
+          (<%= quote.philosopher.biography %>)
+        <% end %>
+      <% else %>
+        <%= "Anonymous" %>
+      <% end %>
+      </div>
+    </div>
 </div>

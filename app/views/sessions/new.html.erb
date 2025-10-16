@@ -1,0 +1,21 @@
+<!-- Miles Halpine 10607950 -->
+<!-- Code from Workshop 9's new_html_erb_code.txt-->
+<!-- This file is the interface for the user login -->
+
+<!-- Display an error message if an error occurs whilst loading the Sign In Form -->
+<% if flash[:error] %>
+    <p class="error" style="color:red;"><%= flash[:error] %></p>
+<% end %>
+
+<!-- Allow the user to enter their email address and password to sign into their account -->
+<h2>Sign in</h2>
+<%= form_tag login_path, method: :post do %>
+    <div class="form-group" style="padding-bottom: 10px;"> <!-- Bootstrap padding component -->
+        <%= email_field_tag :email, nil, required: true, placeholder: 'Email Address', class: 'form-control' %> 
+    <div class="form-group" style="padding-bottom: 10px;">
+        <%= password_field_tag :password, nil, required: true, placeholder: 'Password', class: 'form-control' %>
+    </div>
+    <div>
+        <%= submit_tag 'Login', class: 'btn btn-primary' %> <!-- Bootstrap button component -->
+    </div>
+<% end %>

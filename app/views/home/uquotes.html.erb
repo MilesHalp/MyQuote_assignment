@@ -1,0 +1,20 @@
+<!-- Miles Halpine -->
+<!-- Code adapted from Workshop 9's urecipes.html.erb_code.txt -->
+<!-- This code is an interface for the logged-in user's submitted quotes -->
+
+<!-- Prints any notices that appear -->
+<p style="color: green"><%= notice %></p>
+
+<h3>Your Quotes</h3> 
+<hr />
+<!-- Shows each of the user's quotes -->
+<% @quotes.each do |quote| %>
+    <div class="card bg-body-tertiary" style="margin-bottom:10px"> <!-- Bootstrap background colour and margin components -->
+        <div class="card-body"> <!-- Bootstrap padding component -->
+        <!-- Currently only shows the quote text, but could be modified to show the philosopher or user's name too -->
+        <h4 class="card-title"><%= quote.quote_text %></h4> <!-- Bootstrap title component -->
+        <p class="card-text"><br />[<a href="quotes/<%= quote.id %>">View quote details</a>]</p> <!-- Bootstrap text component -->
+    </div>
+    </div>
+<% end %>
+

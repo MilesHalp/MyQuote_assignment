@@ -1,3 +1,6 @@
+<!-- Miles Halpine 10607950 -->
+<!-- Edits made are in line with modifications made in Workshop 8 -->
+<!-- Interface to view a user's details. Access point for updating a user's details or deleting the account -->
 <p style="color: green"><%= notice %></p>
 
 <%= render @user %>
@@ -6,5 +9,8 @@
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
+<!-- Improved styling and formatting-->
+<div style="padding-top: 20px;">
+  <%= button_to "Delete Account", @user, method: :delete, class: 'btn btn-danger' %>  <!-- Bootstrap button styling -->
+</div>
 </div>

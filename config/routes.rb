@@ -1,4 +1,19 @@
+# Miles Halpine 10607950
+# Routes file that deals with URL requests
+
 Rails.application.routes.draw do
+  # Routes that send admins and standard users to the correct home
+  get '/admin', to: 'home#aindex'
+  get '/userhome', to: 'home#uindex'
+  # Route to the user's quotes
+  get '/your-quotes', to: 'home#uquotes'
+  # Routes for when a user starts and ends a new session
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+  # Route for when a user searches a category
+  get 'search', to: 'search#index'
+  # get "search/index"
   resources :categories
   resources :quotes
   resources :philosophers

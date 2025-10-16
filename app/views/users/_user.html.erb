@@ -1,32 +1,48 @@
-<div id="<%= dom_id user %>">
-  <p>
-    <strong>Fname:</strong>
-    <%= user.fname %>
-  </p>
+<!-- Miles Halpine 10607950 -->
+<!-- Edits made are in line with modifications made in Workshop 8 and Workshop 10's app-views-users-_user.html.erb.txt -->
+<!-- Acts as an interface for viewing the user's personal and account information --> 
 
-  <p>
-    <strong>Lname:</strong>
-    <%= user.lname %>
-  </p>
+<div id="<%= dom_id user %>" class="my-4"> <!-- Bootstrap margin component -->
+  <!-- Form field for displaying the user's first name -->
+  <div class="mb-3"> <!-- Bootstrap margin component -->
+    <label class="form-label"><strong>Fname:</strong></label> <!-- Bootstrap text bolding -->
+    <div><%= user.fname %></div>
+  </div>
 
-  <p>
-    <strong>Email:</strong>
-    <%= user.email %>
-  </p>
+  <!-- Form field for displaying the user's last name -->
+  <div class="mb-3">
+    <label class="form-label"><strong>Lname:</strong></label>
+    <div><%= user.lname %></div>
+  </div>
 
-  <p>
-    <strong>Password digest:</strong>
-    <%= user.password_digest %>
-  </p>
+  <!-- Form field for displaying the user's email address -->
+  <div class="mb-3">
+    <label class="form-label"><strong>Email:</strong></label>
+    <div><%= user.email %></div>
+  </div>
 
-  <p>
-    <strong>Is admin:</strong>
-    <%= user.is_admin %>
-  </p>
+  <!-- Form field for displaying that the user has a password but keep it encrypted -->
+  <div class="mb-3">
+    <label class="form-label"><strong>Current Password:</strong></label>
+    <span class="text-danger">ENCRYPTED</span> <!-- Bootstrap component that sets text as red -->
+  </div>
 
-  <p>
-    <strong>Status:</strong>
-    <%= user.status %>
-  </p>
+  <!-- Form field for displaying the user's account type -->
+  <div class="mb-3">
+    <label class="form-label"><strong>Account Type:</strong></label>
+    <div>
+      <% if user.is_admin %>
+        <span>Administrator</span>
+      <% else %>
+        <span>Standard User</span>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Form field for displaying the user's account status -->
+  <div class="mb-3">
+    <label class="form-label"><strong>Status:</strong></label>
+    <div><%= user.status %></div>
+  </div>
 
 </div>

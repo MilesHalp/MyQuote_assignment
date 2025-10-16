@@ -1,11 +1,19 @@
+<!-- Miles Halpine 10607950 -->
+<!-- Edits made are in line with modifications made in Workshop 8 -->
+<!-- This view file is the interface for users to create a new account -->
+
 <% content_for :title, "New user" %>
 
-<h1>New user</h1>
+<!-- Improved Sign Up header for user-->
+<h4 style="padding-top:10px;">Sign up for a MyQuote account</h4> <!-- Bootstraps padding component -->
 
 <%= render "form", user: @user %>
 
+<!-- Removal of the "Back to users" link, as it's unnecessary for users -->
+<!--
 <br>
 
 <div>
   <%= link_to "Back to users", users_path %>
 </div>
+-->

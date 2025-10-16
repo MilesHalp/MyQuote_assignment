@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_28_141442) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_14_150321) do
   create_table "categories", force: :cascade do |t|
     t.string "cat_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cat_name"], name: "index_categories_on_cat_name", unique: true
   end
 
   create_table "philosophers", force: :cascade do |t|
-    t.string "fname", null: false
-    t.string "lname", null: false
-    t.string "birth_year", null: false
+    t.string "fname", default: "Unknown", null: false
+    t.string "lname"
+    t.string "birth_year", default: "Unknown", null: false
     t.string "death_year"
     t.text "biography"
     t.datetime "created_at", null: false
@@ -33,16 +34,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_141442) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_quote_categories_on_category_id"
+    t.index ["quote_id", "category_id"], name: "index_quote_categories_on_quote_id_and_category_id", unique: true
     t.index ["quote_id"], name: "index_quote_categories_on_quote_id"
   end
 
   create_table "quotes", force: :cascade do |t|
     t.text "quote_text", null: false
-    t.string "pub_year", null: false
+    t.string "pub_year", default: "Unknown", null: false
     t.string "user_comment"
     t.boolean "is_public", default: true
     t.integer "user_id", null: false
-    t.integer "philosopher_id", null: false
+    t.integer "philosopher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["philosopher_id"], name: "index_quotes_on_philosopher_id"

@@ -1,2 +1,17 @@
-<h1>MyQuote Placeholder</h1>
-<p>To be continued...</p>
+<!-- Miles Halpine 10607950 -->
+<!-- Edits made are in line with modifications made in Workshop 8 -->
+<!-- This file is the home view. Contains a welcome message and the top 10 most recently made, public quotes -->
+
+<h1>Welcome to MyQuote</h1>
+<h3> Recently Added Quotes </h3>
+
+<hr />
+<% @quotes.each do |quote| %>
+    <div class="card bg-body-tertiary" style="margin-bottom:10px"> <!-- Bootstrap components for background colours, containers and margins -->
+    <div class="card-body">
+        <!-- Currently only shows the quote text, but could be modified to show the philosopher or user's name too -->
+        <h4 class="card-title"><%= quote.quote_text %></h4> <!-- Bootstrap title component -->
+        <p class="card-text"><br />[<a href="quotes/<%= quote.id %>">View quote details</a>]</p> <!-- Bootstrap text component -->
+    </div>
+    </div>
+<% end %>

@@ -1,4 +1,10 @@
+<!-- Miles Halpine 10607950 -->
+<!-- Edits made are in line with ones made in Workshop 8's _form.html1.txt & Workshop 10's app-views-users-edit.html.erb.txt -->
+<!-- This view file is the interface for editting a user's personal and account details -->
+
+<!-- Initiates the rendering of the user model -->
 <%= form_with(model: user) do |form| %>
+  <!-- Displays any errors related to submitting the user form -->
   <% if user.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,37 +17,56 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :fname, style: "display: block" %>
-    <%= form.text_field :fname %>
+  <!-- Form field for editting the user's first name. Cannot be done by an admin -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
 
-  <div>
-    <%= form.label :lname, style: "display: block" %>
-    <%= form.text_field :lname %>
+  <!-- Form field for editting the user's last name. Cannot be done by an admin -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+  <!-- Form field for editting the user's email address. Cannot be done by an admin -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= form.text_field :email, placeholder: 'Email Address', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
 
-  <div>
-    <%= form.label :password_digest, style: "display: block" %>
-    <%= form.text_field :password_digest %>
+  <!-- Form field for editting the user's password. Cannot be done by an admin but they are able to see it is filled -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= form.password_field :password, placeholder: user.password_digest.present? ? 'Password set' : 'Choose a strong password', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
 
-  <div>
-    <%= form.label :is_admin, style: "display: block" %>
-    <%= form.checkbox :is_admin %>
+  <!-- Form field for making a user a standard user or an admin. Only viewable and useable by an admin -->
+  <div class="form-group" style="padding-bottom: 10px;">
+  <% if logged_in? && is_administrator? %>
+    <%= form.label :is_admin do %>
+      Admin Role
+    <%= form.check_box :is_admin %>
+  <% end %>
+  <% else %>
+    <%= form.hidden_field :is_admin, value: false %>
+  <% end %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+  <!-- Form field for changing a user's account status. Only viewable and useable by an admin -->
+  <div class="form-group" style="padding-bottom: 10px;">
+  <% if logged_in? && is_administrator? %>
+    <%= form.select :status, ['Active', 'Suspended', 'Banned'], {}, class: 'form-control' %>
+  <% elsif logged_in? && !is_administrator? %>
+    <%= form.hidden_field :status %>
+  <% else %>
+    <%= form.hidden_field :status, value: "Active" %>
+  <% end %>
   </div>
 
+  <! -- Submit form field that changes text depending on if it's a standard user or admin submitting -->
   <div>
-    <%= form.submit %>
+  <% if logged_in? %>
+	  <%= form.submit 'Update', class: 'btn btn-primary' %>
+  <% else %>
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
+  <% end %>
   </div>
 <% end %>
+
