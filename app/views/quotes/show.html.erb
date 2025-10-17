@@ -4,9 +4,12 @@
 
 <%= render @quote %>
 
-<div>
+<div style="padding-top: 20px;">
+<% if @quote.user == current_user || is_administrator? %>
   <%= link_to "Edit this quote", edit_quote_path(@quote) %> |
   <%= link_to "Back to quotes", quotes_path %>
+<% end %>
+</div>
 
 <!-- Improved styling and formatting-->
 <div style="padding-top: 20px;">
